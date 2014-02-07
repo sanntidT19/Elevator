@@ -31,6 +31,8 @@ All network packages is sendt by the form of a struct.
 
 *Slave Work(IO unit):
 	-to IO to slave Communication
+	
+	-Utilizes the elev.go to operate the elevator
 
 *Setup Module
 	-choose who is master and slaves.
