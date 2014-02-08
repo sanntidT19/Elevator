@@ -14,6 +14,9 @@ All network packages is sendt by the form of a struct.
 
 
 **MODULES**:
+*Network 
+	passes information over the network
+	(maybe put selvcheck into this?)
 
 *Master Communication:
 	recives external input:
