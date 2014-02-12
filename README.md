@@ -9,14 +9,14 @@ Elevator
 -Questions for Student assistant:
 
 
-All network packages is sendt by the form of a struct.
+All network packages is sendt by the form of a struct. Is this a good idea?
 
 
 
 **MODULES**:
 *Network 
 	passes information over the network
-	(maybe put selvcheck into this?)
+	(maybe put selfcheck into this?)
 
 *Master Communication:
 	recives external input:
@@ -43,5 +43,5 @@ All network packages is sendt by the form of a struct.
 
 *Selfcheck Module
 	-Working with master and slaves, with detecting change in number of elevators.
-	(if no message recived in 0.5 sec assume connecton is lost. Assumed 10 messages per secound is sendt).
+	(if no message recived in 0.5 sec assume connecton is lost. Assumed 10 messages per secound is sent).
 
