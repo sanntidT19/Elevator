@@ -72,6 +72,7 @@ All network packages is sendt by the form of a struct. Is this a good idea?
 
 -Do we need the internal list of the elevators to calculate where an incoming order should be sent?
 -Do we need the working queue?
+-How do the slaves agree on who being master if no master is present?
 
 
 
@@ -82,9 +83,10 @@ From slave to master:
 -Order executed: Direction, internal list and floor -> I am now in this state.
 
 
-From master to slave:
+From master to slave(s):
 
--
+- If something has changed -> send updated lists to all slaves
+- Nothing new -> I am master and I am here.
 
 
 
