@@ -13,7 +13,7 @@ All network packages is sendt by the form of a struct. Is this a good idea?
 
 
 
-**MODULES**:
+**MODULES**
 *Network 
 	passes information over the network
 	(maybe put selfcheck into this?)
@@ -44,4 +44,22 @@ All network packages is sendt by the form of a struct. Is this a good idea?
 *Selfcheck Module
 	-Working with master and slaves, with detecting change in number of elevators.
 	(if no message recived in 0.5 sec assume connecton is lost. Assumed 10 messages per secound is sent).
+	
+	
+**What exceptions can happen and how do we handle it?**
+
+- If one elevator with orders loses connection to the others:
+	- Need to assume that the elevator went down, and distribute the external orders that was queued for it.
+	- The isolated elevator should assume that all the other elevators have gone down and take over all
+	  the queued orders for the other elevators. A little overkill, but its so far the only way.
+
+- The lost elevator connects back with the others after some time:
+	Both the isolated elevator and one of the elevators in the group are now masters, but only one master 
+	is required. Need to pick a master, random master is probably ok. 
+	Two elevators should be more efficient than one, so if an elevator filled with orders is connected to 
+	an elevator without orders, the external orders should be distributed between the elevators.
+	Here it has a lot to say what way the elevator is going and which floor it is in.
+
+
+
 
