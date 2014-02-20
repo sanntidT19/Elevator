@@ -11,6 +11,7 @@ type Slave struct {
 	nr int //or name is ip?
 	conn net.Conn
 	internalOrderList []int
+	//externalOrders -> send to master for distributing
 	quit chan bool
 	dir string
 	currentFloor int

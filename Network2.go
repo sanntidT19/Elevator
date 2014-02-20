@@ -12,6 +12,7 @@ func configureNetwork() {
 }
 func chooseMaster(ipList [] int) { 
 	//choose new master
+	//Pick at random(?)
 	connectTcp()
 }
 
@@ -28,15 +29,19 @@ func connectTcp(ipList []int)  {
 	}
 }
 
-func send(totalOrders string, conn) {
+func send(sending string, conn net) {
 	conn.bufio.
 }
 //does this need a connection to read from?
-func recive(elevStatus string) {
+func recive(elevStatus string, conn) {
 
 	status, err := bufio.NewReader(conn).ReadString('\n')
 	fmt.Print(status)
 }
 func detectChangedNetwork() {
+
+}
+
+func closeConnection() {
 
 }
