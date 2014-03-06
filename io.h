@@ -1,14 +1,17 @@
-/ Wrapper for libComedi I/O.
+// Wrapper for libComedi I/O.
 // These functions provide and interface to libComedi limited to use in
 // the real time lab.
 //
 // 2006, Martin Korsgaard
+
+
+
 #ifndef __INCLUDE_IO_H__
 #define __INCLUDE_IO_H__
 
 
 
-/**
+/*
   Initialize libComedi in "Sanntidssalen"
   @return Non-zero on success and 0 on failure
 */

@@ -3,7 +3,7 @@
 //
 // 2007, Martin Korsgaard
 
-
+/*
 #include "channels.h"
 #include "elev.h"
 #include "io.h"
@@ -179,5 +179,5 @@ void elev_set_door_open_lamp(int value){
     else
         io_clear_bit(DOOR_OPEN);
 }
-
-
+*/
+import "C"

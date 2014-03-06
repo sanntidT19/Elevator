@@ -187,7 +187,7 @@ int elev_get_floor_sensor_signal(void){
         return -1;
 }
 */
-elev_get_button_signal(button elev_button_type_t, floor int) {
+func elev_get_button_signal(button elev_button_type_t, floor int) {
 	assert(floor >= 0)
     assert(floor < N_FLOORS)
     assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS-1))

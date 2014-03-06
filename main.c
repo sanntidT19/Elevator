@@ -1,9 +1,10 @@
 #include "elev.h"
 #include <stdio.h>
 
-
+/*
 int main(){
     // Initialize hardware
+		elev_init();
     if (!elev_init()) {
         printf(__FILE__ ": Unable to initialize elevator hardware\n");
         return 1;
@@ -28,3 +29,10 @@ int main(){
 
     return 0;
 }
+*/
+import "C"
+
+func main(){
+	C.main()
+}
+
