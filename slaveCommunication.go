@@ -10,22 +10,32 @@ import (
 type Slave struct {
 	nr int //or name is ip?
 	conn net.Conn
-	internalOrderList []int
+	internalOrderList := make([]int,  FLOORS) //defined as a slice
 	//externalOrders -> send to master for distributing
 	quit chan bool
 	dir string
 	currentFloor int
+
 	incoming string //holds all relevatn elevator information and lists
 	outgoing string //internal list, direction, floor
 }
+func (s *Slave) Close() {
+	s.quit <- true
+	s.conn.Close()
+	s.ReMoveMe()
+}
+
+//SEND AND RECIVE ORDERS
 func (s *Slave) incommingHandler() {
 	if strings.HasPrefix(incoming, "odr") {
 		//update OrderList
 	} else if strings.HasPrefix(incoming, "acn") {
-		//master is still there.
+		//if master is still there, continue.
+		//else chooseMaster
+		s.Close()
+
 	}
 }
-
 //Sending messages to master, including internal list, direction and currentFLoor
 func (s *Slave) outgoingHandler() { 
 	var orderString string
@@ -33,9 +43,8 @@ func (s *Slave) outgoingHandler() {
 	for i := 0; i < len(s.internalOrderList); i++ {
 		orderString += strconv.Itoa(s.internalOrderList[i])
 	}
-	s.outgoing += orderString + s.dir + strconv.Itoa(s.currentFloor)
+	s.outgoing += strconv.Itoa(s.nr) + orderString + strconv.Itoa(s.dir) + strconv.Itoa(s.currentFloor)
 }
-
 
 func (s *Slave) Read(buffer []byte) bool {
 	structRead, err := s.conn.Read(buffer)
@@ -47,14 +56,6 @@ func (s *Slave) Read(buffer []byte) bool {
 	s.incoming := string(structRead)
 	return true
 }
-
-
-func (s *Slave) Close() {
-	s.quit <- true
-	s.conn.Close()
-	s.ReMoveMe()
-}
-
 
 func Log(v ...interface{}) {
 	fmt.Println(v...)
@@ -92,7 +93,9 @@ func SlaveInputReader(slave *Slave) {
 func (s *Slave) slaveSender() {
 	bytes, err :=  json.Marshal(s.outgoing)
 	
+	
 	if err =! nil {
 		Log("Error in slave sender" + err)
 	}
 }
+func (s *Slave) 

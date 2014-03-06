@@ -7,10 +7,10 @@ Elevator
 
 
 -Questions for Student assistant:
-
+	Is it a good solution to organize the master-slave config as a linked list?
 
 All network packages is sendt by the form of a struct.
-
+	
 
 
 **MODULES**:

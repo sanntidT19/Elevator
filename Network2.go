@@ -45,3 +45,6 @@ func detectChangedNetwork() {
 func closeConnection() {
 
 }
+ssh 129.241.187.### where //### is the remote IP
+//Copying files from your own machine:
+scp -r student@129.241.187.###:fileOrFolderAtYourMachine fileOrFolderAtRemote

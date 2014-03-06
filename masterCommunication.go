@@ -1,5 +1,12 @@
 package modules
 
+import (
+	"net"
+	"strings"
+	"strconv"//for Itoa; int to string.
+	"encoding/json"
+	)
+
 const (
 FLOORS = 4
 ELEV = 3
@@ -11,19 +18,26 @@ type Master struct {
 	floors []int
 
 	orderList []string //Maybe make a 2-dim array(matrix) of ints?
-	internalOrders []int
+	internalOrders [][]int
 	extractIncoming []int
 	incomingOrder []int
-	incoming string
-	outgoing string
+
+	incoming string//slice
+	outgoing string//slice
 
 }
 
 func (m *Master) distributeOrders() {
 	
-	for i := 0; i<len(dir); i++ {
+	for i := 0; i<FLOORS; i++ {
+		for j := 0 i<FLOORS; j++ {
 		//if a elevator has internalOrders equal to any element in order list, pick that one!
-
+			if m.internalOrders[i][j] == 1 {//(?) format of internalOrders??
+				temp := []rune(m.outgoing)
+				temp[3+(i*FLOORS)+j] = 1
+				m.outgoing := string(temp)
+			}
+		}
 		if m.dir[i] > 0 && m.orderList[i] > m.floors[i] {
 			//if direction is up and orderd floor is higher than current
 			//+3 is to skip the prefix letters, i is the elevator adressed, orderList[i] contains a floor number
@@ -41,8 +55,10 @@ func (m *Master) distributeOrders() {
 	}
 }
 func (m *Master) extractIncoming() {
+	incoming := m.incoming
 	//split the incoming string into: internalOrders, dir, floors, externalIncomming(get orders from slaves external panels -> give orders to master)
-	for i := 0; i < FLOORS; i++ {
+	for i := 0; i < ELEV; i++ {
 
+		orderList[i] = incoming[i:i+FLOORS]
 	}
 }
