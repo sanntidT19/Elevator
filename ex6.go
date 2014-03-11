@@ -5,6 +5,7 @@ import (
 	."net"
 	"time"
 	"strconv"
+	"os/exec"
 )
 const (
 	MAXWAIT = time.Second
@@ -13,22 +14,24 @@ const (
 
 func main() {
 	nr := backup()
+	cmd, _ := exec.Command("mate-terminal").Output()
 	// spawn new window
 	//	mate terminal
 	primary(nr)
+	cmd.exec.Command("go run ex6.go").Output()
 }
 
 func backup() int {
-	//	nr
+	var nr int
 	buf := make([]byte, 1024)
-	address, err := ResolveUDPAddr("udp", "129.241.187.255:20022")
+	address, err := ResolveUDPAddr("udp", "129.241.187.255:20020")
 	conn, _ := ListenUDP("udp", address)
 
 	for {
 		conn.SetReadDeadline(time.Now().Add(1*time.Second))
-		n, _, err := conn.ReadFromUDP(buf) //n contanis numbers of used bytes
+		n, _, _:= conn.ReadFromUDP(buf) //n contanis numbers of used bytes
 		if err == nil {		
-			nr = strconv.Atoi(buf[0:n])
+			nr,_ = strconv.Atoi(string(buf[0:n]))
 		} else {
 			break;
 		}
@@ -38,11 +41,12 @@ func backup() int {
 }
 
 func primary(nr int){
-		conn := DialUDP("udp", "localhost", 20022)
+		address, _ := ResolveUDPAddr("udp", "129.241.187.255:20020")
+		conn, _ := DialUDP("udp", address, nil)
 		for {
 			nr++
 			fmt.Println(nr)
-			conn.Write([]byte(strconf.Itoa(nr)))
+			conn.Write([]byte(strconv.Itoa(nr)))
 			time.Sleep(300*time.Millisecond)
 		}
 }
